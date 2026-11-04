@@ -15,7 +15,7 @@ jobs:
     working_directory: ~/ExampleApplication
 
     docker:
-      - image: cimg/node26.13.0
+      - image: cimg/node:26.13.0
 
     steps:
       - checkout
