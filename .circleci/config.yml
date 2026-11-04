@@ -15,7 +15,7 @@ jobs:
     working_directory: ~/ExampleApplication
 
     docker:
-      - image: circleci/node26.13.0
+      - image: cimg/node26.13.0
 
     steps:
       - checkout
