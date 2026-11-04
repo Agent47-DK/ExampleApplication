@@ -12,7 +12,7 @@ workflows:
 
 jobs:
   build:
-    working_directory: ~/ExampleApplication/ExampleApplication
+    working_directory: ~/ExampleApplication
 
     docker:
       - image: cimg/node:26.13.0
@@ -20,14 +20,25 @@ jobs:
     steps:
       - checkout
       - run:
-          name: update-npm
-          command: 'sudo npm install -g npm@5'
+          name: Check Node and npm versions
+          command: |
+            node --version
+            npm --version
       - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          keys:
+            - npm-deps-{{ checksum "ExampleApplication/package.json" }}
+
+      - run:
+          name: update-npm
+          command: |
+            cd ExampleApplication
+            'sudo npm install -g npm@5'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "ExampleApplication/package-lock.json" }}
       - run:
           name: install-npm
           command: npm install
       - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ checksum "ExampleApplication/package-lock.json" }}
           paths:
             - ./node_modules
