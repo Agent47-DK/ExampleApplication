@@ -31,8 +31,7 @@ jobs:
       - run:
           name: update-npm
           command: |
-            cd ExampleApplication
-            'npm install'
+            cd ExampleApplication && npm install
       - restore_cache:
           key: dependency-cache-{{ checksum "ExampleApplication/package-lock.json" }}
       - run:
