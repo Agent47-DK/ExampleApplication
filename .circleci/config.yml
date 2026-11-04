@@ -32,7 +32,7 @@ jobs:
           name: update-npm
           command: |
             cd ExampleApplication
-            'sudo npm install -g npm@5'
+            'npm install'
       - restore_cache:
           key: dependency-cache-{{ checksum "ExampleApplication/package-lock.json" }}
       - run:
